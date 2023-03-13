@@ -110,7 +110,7 @@ const App = () => {
         </Grid>
         <Grid xs={12} md={3}>
           <Typography variant="h5" gutterBottom>
-            Select a Shipper Name (Eg - Etsy, Amazon, KashMoney)
+            Select a Shipper Name (Eg - Etsy, Shopify, KashMoney)
           </Typography>
           <div style={{ width: "100%" }}>
             <form onSubmit={(e) => handleSubmit(e)}>
