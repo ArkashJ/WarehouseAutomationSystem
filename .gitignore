@@ -22,8 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-#environment file
-.env
-env.d.ts
-vite-env.d.ts
