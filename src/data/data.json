@@ -1,0 +1,36 @@
+{
+  "Data": [
+    {
+      "Shipper_ID": "KashMoney",
+      "Received": [
+        {
+          "Date": "Mar 11, 2022",
+          "WarehouseID": "a908cef7-4c67-40f3-88f7-08a03ba4104e",
+          "ShippingPO": "3f7b2654-052d-4a4e-905f-87f22a3877a9",
+          "ShipmentID": "3",
+          "BoxesRcvd": "5"
+        },
+        {
+          "Date": "Mar 10, 2022",
+          "WarehouseID": "a908cef7-4c67-40f3-88f7-08a03ba4104e",
+          "ShippingPO": "71b720e3-2847-45de-bbe7-8fa099d64632",
+          "ShipmentID": "2",
+          "BoxesRcvd": "2"
+        },
+        {
+          "Date": "Mar 9, 2022",
+          "WarehouseID": "a908cef7-4c67-40f3-88f7-08a03ba4104e",
+          "ShippingPO": "81d06bd2-39e3-427c-9fb3-4e217b9a4d60",
+          "ShipmentID": "1",
+          "BoxesRcvd": "12"
+        }
+      ]
+    }
+  ],
+  "id": "a39003ec-409b-45e4-87b5-f2ff3a5e5e22",
+  "_rid": "NAE2APxfhvYBAAAAAAAAAA==",
+  "_self": "dbs/NAE2AA==/colls/NAE2APxfhvY=/docs/NAE2APxfhvYBAAAAAAAAAA==/",
+  "_etag": "\"86007afb-0000-0700-0000-640e2a250000\"",
+  "_attachments": "attachments/",
+  "_ts": 1678649893
+}
