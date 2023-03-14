@@ -42,7 +42,7 @@ paths:
                 ]
             }
         ]
-    }'
+    }
   /get-item-individual:
     get:
       summary: get-item-individual
