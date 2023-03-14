@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: getInvoice
-  description: Import from "functionInventory" Function App
+  description: Import from "functionInventory" Function App, 
   version: '1.0'
 servers:
   - url: https://functioninventory-apim.azure-api.net/getInvoice
@@ -12,14 +12,44 @@ paths:
       operationId: post-get-db
       responses:
         '200':
-          description: 
+          description: ocp-apim key = 3ee1050998c94164b78b3b7612dfa08d, add a JSON of the following format
+          {
+        "Data": [
+            {
+                "Shipper_ID": "Etsy",
+                "Received": [
+                    {
+                        "Date": "Mar 4, 2022",
+                        "WarehouseID": "a927f7-4c67-40f3-88f7-08a03ba4104e",
+                        "ShippingPO": "3f7adcaj654-052d-4a4e-905f-87f22a3877a9",
+                        "ShipmentID": "8",
+                        "BoxesRcvd": "5"
+                    },
+                    {
+                        "Date": "Mar 10, 2022",
+                        "WarehouseID": "a927f7-4c67-40f3-88f7-08a03ba4104e",
+                        "ShippingPO": "71b720e3-2847-45de-bbe7-8fa099d64632",
+                        "ShipmentID": "2",
+                        "BoxesRcvd": "2"
+                    },
+                    {
+                        "Date": "Mar 9, 2022",
+                        "WarehouseID": "a927f7-4c67-40f3-88f7-08a03ba4104e",
+                        "ShippingPO": "81d06bd2-39e3-427c-9fb3-4e217b9a4d60",
+                        "ShipmentID": "1",
+                        "BoxesRcvd": "12"
+                    }
+                ]
+            }
+        ]
+    }'
   /get-item-individual:
     get:
       summary: get-item-individual
       operationId: get-get-item-individual
       responses:
         '200':
-          description: 
+          description: add query. Name = name, value = shopify, ocp-apim key = 3ee1050998c94164b78b3b7612dfa08d
 components:
   securitySchemes:
     apiKeyHeader:
