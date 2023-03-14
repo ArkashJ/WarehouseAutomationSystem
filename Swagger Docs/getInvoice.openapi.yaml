@@ -1,15 +1,22 @@
 openapi: 3.0.1
 info:
-  title: upload-info
+  title: getInvoice
   description: Import from "functionInventory" Function App
   version: '1.0'
 servers:
-  - url: https://functioninventory-apim.azure-api.net/functionInventory
+  - url: https://functioninventory-apim.azure-api.net/getInvoice
 paths:
   /get-db:
     post:
       summary: get-db
       operationId: post-get-db
+      responses:
+        '200':
+          description: 
+  /get-item-individual:
+    get:
+      summary: get-item-individual
+      operationId: get-get-item-individual
       responses:
         '200':
           description: 
