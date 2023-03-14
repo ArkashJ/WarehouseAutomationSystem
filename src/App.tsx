@@ -14,8 +14,7 @@ const App = () => {
 
   const getData = async (shipperName: string) => {
     // open data/data.json and set it to data
-    const BASE_URL =
-      import.meta.env.VITE_APP_URL;
+    const BASE_URL = import.meta.env.VITE_APP_URL;
     const API_URL = BASE_URL + shipperName;
 
 		
@@ -26,6 +25,7 @@ const App = () => {
       headers: {
         "Ocp-Apim-Subscription-Key": import.meta.env.VITE_SubKEY,
         // "key": "b45fca878b9f4c9599313cb223f39227",
+        // "clientKey" : "b45fca878b9f4c9599313cb223f39227"
       },
     })
       .then((response) => response.json())
