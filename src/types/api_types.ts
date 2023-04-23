@@ -14,3 +14,9 @@ export interface ITableData{
     shipmentID  : string 
     boxesRcvd   : string
 }
+
+export interface IImageUpload{
+    id          : 'Image'
+    file        : File
+    name        : string
+}
