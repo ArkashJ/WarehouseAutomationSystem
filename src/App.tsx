@@ -41,18 +41,6 @@ const App = () => {
 		return dataFromApi;
   };
 
-  // useEffect(() => {
-  //   if (isSubmitted) {
-  //     const fecthData = async () => {
-  //       await getData(shipperName);
-  //     };
-  //     fecthData().then(() => {
-	// 			console.log("Data fetched");
-	// 			formatDataIntoITableData();
-	// 		});
-  //     setIsSubmitted(false);
-  //   }
-  // }, [isSubmitted]);
 
   const formatDataIntoITableData = (dataFromApi: any) => {
     console.log("We got: ", dataFromApi);
