@@ -3,14 +3,15 @@ import { Button, Container, Typography, Box } from "@mui/material";
 import { BlobServiceClient, StorageSharedKeyCredential } from "@azure/storage-blob";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import axios from 'axios';
+import { QueueServiceClient } from "@azure/storage-queue";
 
 interface Props {}
 
-const account = "imageuploadstored";
-const accountKey = "sckxjS+pu93LuPHZSZ2XeQXRJ7yQzAkaEa3ebU3Fma/k9f/dmEx1HqoA4YUAxJF3Tz57/e0iVeO/+AStmAjeYQ==";
+const account : String = import.meta.env.VITE_ACCOUNT_NAME;
+const accountKey : String = import.meta.env.VITE_AZ_KEY;
 const containerName = "uploadimg";
 
-const sasToken = "?sv=2021-12-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-04-24T08:53:14Z&st=2023-04-24T00:53:14Z&spr=https&sig=%2FkZsSMWcH9luT7xGV1meb4HqD7RyPD4Zuj5JSiSza2U%3D";
+const sasToken = import.meta.env.VITE_SAS_TOKEN;
 
 const blobServiceClient = new BlobServiceClient(
   `https://${account}.blob.core.windows.net?${sasToken}`
@@ -31,48 +32,40 @@ const DataEntry: React.FC<Props> = () => {
       alert("Please select a file to upload.");
       return;
     }
-
-    // Implement the logic to send the file to the backend here
+  
     try {
-        const containerClient = blobServiceClient.getContainerClient(containerName);
-        const blobClient = containerClient.getBlockBlobClient(selectedFile.name);
-    
-        const options = {
-          blockSize: 4 * 1024 * 1024, // 4MB block size
-          concurrency: 20, // Max number of parallel uploads
-          onProgress: (ev: any) => console.log("Progress:", ev.loadedBytes),
-          blobHTTPHeaders: {
-            blobContentType: selectedFile.type,
-          },
-          metadata: {
-            fileName: selectedFile.name,
-          },
-        };
-    
-        await blobClient.uploadBrowserData(selectedFile, options);
-    
-        console.log("File uploaded to Blob Storage:", selectedFile.name);
-        try {
-          const imageUrl = blobClient.url;
-          const functionUrl = 'https://functioninventory.azurewebsites.net/api/image_to_text';
-        
-          const response = await axios.post(functionUrl, { imageUrl }, { headers: { 'Content-Type': 'application/json' } });
-        
-          if (response.status === 200) {
-            console.log('Azure Function successfully processed the image:', selectedFile.name);
-          } else {
-            console.error('Error processing image with Azure Function:', response.status);
-          }
-        } catch (error) {
-          console.error('Error calling Azure Function:', error);
-        }
-      } catch (error) {
-        console.error("Error uploading file to Blob Storage:", error);
-      }
-
-    
-
+      const containerClient = blobServiceClient.getContainerClient(containerName);
+      const blobClient = containerClient.getBlockBlobClient(selectedFile.name);
+  
+      const queueServiceClient = new QueueServiceClient(
+        `https://${account}.queue.core.windows.net?${sasToken}`
+      );
+      const queueClient = queueServiceClient.getQueueClient("images");
+  
+      const options = {
+        blockSize: 4 * 1024 * 1024, // 4MB block size
+        concurrency: 20, // Max number of parallel uploads
+        onProgress: (ev: any) => console.log("Progress:", ev.loadedBytes),
+        blobHTTPHeaders: {
+          blobContentType: selectedFile.type,
+        },
+        metadata: {
+          fileName: selectedFile.name,
+        },
+      };
+  
+      await blobClient.uploadBrowserData(selectedFile, options);
+  
+      console.log("File uploaded to Blob Storage:", selectedFile.name);
+  
+      const imageUrl = blobClient.url;
+      await queueClient.sendMessage(imageUrl);
+  
+    } catch (error) {
+      console.error("Error uploading file to Blob Storage:", error);
+    }
   };
+  
 
   return (
     <Container maxWidth="sm">
